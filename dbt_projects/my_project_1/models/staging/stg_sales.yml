@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_sales
+    description: "Cleaned staging model for sales data"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - unique
+      - name: region
+        tests:
+          - not_null
+      - name: category
+        tests:
+          - not_null
+      - name: sales
+        tests:
+          - not_null
+          - greater_than_zero:
+              column_name: sales
+      - name: margin
+        tests:
+          - accepted_range:
+              min_value: 0
+              max_value: 1
