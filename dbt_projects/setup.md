@@ -12,3 +12,5 @@ dbt run --select path:models/marts
 dbt docs generate
 
 dbt docs serve
+
+ls ~/.dbt/
