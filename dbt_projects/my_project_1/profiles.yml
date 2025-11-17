@@ -4,8 +4,8 @@ my_project_1:
       account: "${{ secrets.SNOW_ACCOUNT }}"
       database: "${{ secrets.SNOW_DATABASE }}"
       password: "${{ secrets.SNOW_PASSWORD }}"
-      role: "${{ secrets.SNOW_ROLE }}"
-      schema: "${{ secrets.SNOW_SCHEMA }}"
+      role: "ACCOUNTADMIN"
+      schema: "PUBLIC"
       threads: 4
       type: snowflake
       user: "${{ secrets.SNOW_USER }}"
