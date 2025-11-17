@@ -51,6 +51,14 @@ jobs:
         run: snow connection test -c default
 
       - name: Deploy dbt project using Snow CLI
+        env:
+          SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
+          SNOW_USER: ${{ secrets.SNOW_USER }}
+          SNOW_PASSWORD: ${{ secrets.SNOW_PASSWORD }}
+          SNOW_ROLE: ${{ secrets.SNOW_ROLE }}
+          SNOW_WAREHOUSE: ${{ secrets.SNOW_WAREHOUSE }}
+          SNOW_DATABASE: ${{ secrets.SNOW_DATABASE }}
+          SNOW_SCHEMA: ${{ secrets.SNOW_SCHEMA }}
         run: |
           cd dbt_projects/my_project_1  # change if needed
           snow dbt deploy my_cli_dbt_project_2
