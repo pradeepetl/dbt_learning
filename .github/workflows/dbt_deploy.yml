@@ -79,7 +79,21 @@ jobs:
       # ------------------------------
       # Deploy dbt
       # ------------------------------
-      - name: Deploy dbt using Snow CLI
+      # - name: Deploy dbt using Snow CLI
+      #   run: |
+      #     cd dbt_projects/my_project_1
+      #     snow dbt deploy my_project_1
+
+      - name: Deploy dbt using inline connection
         run: |
-          cd dbt_projects/my_project_1
-          snow dbt deploy my_project_1
+          cd dbt
+          snow dbt deploy \
+            --set connection.account=${{ secrets.SNOW_ACCOUNT }} \
+            --set connection.user=${{ secrets.SNOW_USER }} \
+            --set connection.password=${{ secrets.SNOW_PASSWORD }} \
+            --set connection.warehouse=${{ secrets.SNOW_WAREHOUSE }} \
+            --set connection.role=${{ secrets.SNOW_ROLE }} \
+            --set connection.database=${{ secrets.SNOW_DATABASE }} \
+            --set connection.schema=${{ secrets.SNOW_SCHEMA }}
+            my_project_1
+
