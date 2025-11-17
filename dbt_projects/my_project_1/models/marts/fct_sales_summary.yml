@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: fct_sales_summary
+    description: "Fact table showing total sales, profit, and margin aggregated by region and category"
+    columns:
+      - name: region
+        tests:
+          - not_null
+      - name: category
+        tests:
+          - not_null
+      - name: total_sales
+        tests:
+          - not_null
+          - greater_than_zero:
+              column_name: total_sales
+      - name: total_profit
+        tests:
+          - not_null

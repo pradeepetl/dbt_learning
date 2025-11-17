@@ -1,0 +1,13 @@
+my_project_1:
+  outputs:
+    dev:
+      account: pejnhlw-mm11963
+      database: DEMO_DB
+      password: *************
+      role: ACCOUNTADMIN
+      schema: PUBLIC
+      threads: 4
+      type: snowflake
+      user: pradeep
+      warehouse: COMPUTE_WH
+  target: dev

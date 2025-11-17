@@ -1,0 +1,45 @@
+name: Deploy dbt to Snowflake
+
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+
+jobs:
+  deploy-dbt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Snow CLI
+        run: |
+          pip install snowflake-cli-labs
+
+      - name: Create Snow CLI config
+        run: |
+          mkdir -p ~/.snowflake
+          cat <<EOF > ~/.snowflake/config.toml
+          [connections.default]
+          account = "${{ secrets.SNOW_ACCOUNT }}"
+          user = "${{ secrets.SNOW_USER }}"
+          password = "${{ secrets.SNOW_PASSWORD }}"
+          role = "${{ secrets.SNOW_ROLE }}"
+          warehouse = "${{ secrets.SNOW_WAREHOUSE }}"
+          database = "${{ secrets.SNOW_DATABASE }}"
+          schema = "${{ secrets.SNOW_SCHEMA }}"
+          EOF
+
+      - name: Test Snowflake connection
+        run: snow connection test -c default
+
+      - name: Deploy dbt project using Snow CLI
+        run: |
+          cd dbt_project  # change if needed
+          snow dbt deploy
