@@ -69,7 +69,14 @@ jobs:
             target: dev
             connection: default
           EOF
+      
 
+      - name: Debug Snow variables
+        run: |
+          echo "ACCOUNT=${{ secrets.SNOW_ACCOUNT }}"
+          echo "USER=${{ secrets.SNOW_USER }}"
+          echo "DATABASE=${{ secrets.SNOW_DATABASE }}"
+          echo "SCHEMA=${{ secrets.SNOW_SCHEMA }}"
 
       - name: Deploy dbt project using Snow CLI
         env:
