@@ -1,13 +1,13 @@
 my_project_1:
   outputs:
     dev:
-      account: pejnhlw-mm11963
-      database: DEMO_DB
-      password: *************
-      role: ACCOUNTADMIN
-      schema: PUBLIC
+      account: "${{ secrets.SNOW_ACCOUNT }}"
+      database: "${{ secrets.SNOW_DATABASE }}"
+      password: "${{ secrets.SNOW_PASSWORD }}"
+      role: "${{ secrets.SNOW_ROLE }}"
+      schema: "${{ secrets.SNOW_SCHEMA }}"
       threads: 4
       type: snowflake
-      user: pradeep
-      warehouse: COMPUTE_WH
+      user: "${{ secrets.SNOW_USER }}"
+      warehouse: "${{ secrets.SNOW_WAREHOUSE }}"
   target: dev
