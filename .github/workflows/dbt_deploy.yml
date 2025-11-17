@@ -86,7 +86,7 @@ jobs:
 
       - name: Deploy dbt using inline connection
         run: |
-          cd dbt
+          cd dbt_projects/my_project_1
           snow dbt deploy \
             --set connection.account=${{ secrets.SNOW_ACCOUNT }} \
             --set connection.user=${{ secrets.SNOW_USER }} \
