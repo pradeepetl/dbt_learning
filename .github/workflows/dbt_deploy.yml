@@ -43,5 +43,5 @@ jobs:
 
       - name: Deploy dbt project using Snow CLI
         run: |
-          cd dbt_project  # change if needed
-          snow dbt deploy
+          cd dbt_projects/my_project_1  # change if needed
+          snow dbt deploy my_cli_dbt_project_2
