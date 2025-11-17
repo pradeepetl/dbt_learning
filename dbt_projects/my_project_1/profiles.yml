@@ -1,7 +1,7 @@
 my_project_1:
   outputs:
     dev:
-      account: "pejnhlw-mm11963"
+      account: "{{ account }}"
       database: "DEMO_DB"
       password: "AbcdAbcdAbcd067$"
       role: "ACCOUNTADMIN"
