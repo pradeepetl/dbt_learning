@@ -35,7 +35,9 @@ jobs:
           database = "${{ secrets.SNOW_DATABASE }}"
           schema = "${{ secrets.SNOW_SCHEMA }}"
           EOF
-
+      - name: provide permissions to config file
+        run: |
+          chmod 600 ~/.snowflake/config.toml
       - name: Test Snowflake connection
         run: snow connection test -c default
 
