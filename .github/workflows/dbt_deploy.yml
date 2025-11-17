@@ -89,4 +89,4 @@ jobs:
           SNOW_SCHEMA: ${{ secrets.SNOW_SCHEMA }}
         run: |
           cd dbt_projects/my_project_1  # change if needed
-          snow dbt deploy my_cli_dbt_project_2
+          snow dbt deploy my_project_1
