@@ -50,6 +50,27 @@ jobs:
       - name: Test Snowflake connection
         run: snow connection test -c default
 
+      - name: Create snowflake.yml for Snow CLI
+        run: |
+          cat <<EOF > snowflake.yml
+          connections:
+            default:
+              account: ${SNOW_ACCOUNT}
+              user: ${SNOW_USER}
+              password: ${SNOW_PASSWORD}
+              role: ${SNOW_ROLE}
+              warehouse: ${SNOW_WAREHOUSE}
+              database: ${SNOW_DATABASE}
+              schema: ${SNOW_SCHEMA}
+
+          dbt:
+            profile_name: my_project_1
+            project_dir: dbt_projects/my_project_1
+            target: dev
+            connection: default
+          EOF
+
+
       - name: Deploy dbt project using Snow CLI
         env:
           SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
