@@ -9,6 +9,15 @@ jobs:
   deploy-dbt:
     runs-on: ubuntu-latest
 
+    env:
+      SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
+      SNOW_USER: ${{ secrets.SNOW_USER }}
+      SNOW_PASSWORD: ${{ secrets.SNOW_PASSWORD }}
+      SNOW_ROLE: ${{ secrets.SNOW_ROLE }}
+      SNOW_WAREHOUSE: ${{ secrets.SNOW_WAREHOUSE }}
+      SNOW_DATABASE: ${{ secrets.SNOW_DATABASE }}
+      SNOW_SCHEMA: ${{ secrets.SNOW_SCHEMA }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -19,11 +28,9 @@ jobs:
           python-version: '3.10'
 
       - name: Install Snow CLI
-        run: pip install snowflake-cli-labs
+        run: |
+          pip install snowflake-cli-labs
 
-      # ------------------------------
-      # Create config.toml for snow connection test
-      # ------------------------------
       - name: Create Snow CLI config
         run: |
           mkdir -p ~/.snowflake
@@ -37,16 +44,12 @@ jobs:
           database = "${{ secrets.SNOW_DATABASE }}"
           schema = "${{ secrets.SNOW_SCHEMA }}"
           EOF
-
-      - name: Set permissions
-        run: chmod 600 ~/.snowflake/config.toml
-
+      - name: provide permissions to config file
+        run: |
+          chmod 600 ~/.snowflake/config.toml
       - name: Test Snowflake connection
         run: snow connection test -c default
 
-      # ------------------------------
-      # Create snowflake.yml for dbt deploy
-      # ------------------------------
       - name: Create snowflake.yml for Snow CLI
         run: |
           cat <<EOF > snowflake.yml
@@ -66,10 +69,24 @@ jobs:
             target: dev
             connection: default
           EOF
+      
 
-      # ------------------------------
-      # Deploy dbt
-      # ------------------------------
-      - name: Deploy dbt using Snow CLI
+      - name: Debug Snow variables
         run: |
-          snow dbt deploy
+          echo "ACCOUNT=$SNOW_ACCOUNT"
+          echo "USER=$SNOW_USER"
+          echo "DATABASE=$SNOW_DATABASE"
+
+
+      - name: Deploy dbt project using Snow CLI
+        env:
+          SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
+          SNOW_USER: ${{ secrets.SNOW_USER }}
+          SNOW_PASSWORD: ${{ secrets.SNOW_PASSWORD }}
+          SNOW_ROLE: ${{ secrets.SNOW_ROLE }}
+          SNOW_WAREHOUSE: ${{ secrets.SNOW_WAREHOUSE }}
+          SNOW_DATABASE: ${{ secrets.SNOW_DATABASE }}
+          SNOW_SCHEMA: ${{ secrets.SNOW_SCHEMA }}
+        run: |
+          cd dbt_projects/my_project_1  # change if needed
+          snow dbt deploy my_project_1
