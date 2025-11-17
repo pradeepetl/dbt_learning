@@ -1,13 +1,13 @@
 my_project_1:
   outputs:
     dev:
-      account: "{{account}}"
-      database: "{{database}}"
-      password: "{{password}}"
+      account: "{{ account }}"
+      database: "{{ database }}"
+      password: "{{ password }}"
       role: "ACCOUNTADMIN"
-      schema: "{{schema}}"
+      schema: "{{ schema }}"
       threads: 4
       type: snowflake
-      user: "{{user}}"
-      warehouse: "{{warehouse}}"
+      user: "{{ user }}"
+      warehouse: "{{ warehouse }}"
   target: dev
