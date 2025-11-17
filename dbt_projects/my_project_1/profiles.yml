@@ -1,13 +1,13 @@
 my_project_1:
   outputs:
     dev:
-      account: "${{ secrets.SNOW_ACCOUNT }}"
-      database: "${{ secrets.SNOW_DATABASE }}"
-      password: "${{ secrets.SNOW_PASSWORD }}"
+      account: "${{ env_var(SNOW_ACCOUNT) }}"
+      database: "${{ env_var(SNOW_DATABASE) }}"
+      password: "${{ env_var(SNOW_PASSWORD) }}"
       role: "ACCOUNTADMIN"
       schema: "PUBLIC"
       threads: 4
       type: snowflake
-      user: "${{ secrets.SNOW_USER }}"
-      warehouse: "${{ secrets.SNOW_WAREHOUSE }}"
+      user: "${{ env_var(SNOW_USER) }}"
+      warehouse: "${{ env_var(SNOW_WAREHOUSE) }}"
   target: dev
