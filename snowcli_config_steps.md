@@ -1,6 +1,6 @@
 # create virtual env
-python -m snowcli-py311-env myenv
-source snowcli-py311-env/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 
 # install snow cli
 
