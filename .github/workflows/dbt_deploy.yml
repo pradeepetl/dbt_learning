@@ -9,6 +9,15 @@ jobs:
   deploy-dbt:
     runs-on: ubuntu-latest
 
+    env:
+      SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
+      SNOW_USER: ${{ secrets.SNOW_USER }}
+      SNOW_PASSWORD: ${{ secrets.SNOW_PASSWORD }}
+      SNOW_ROLE: ${{ secrets.SNOW_ROLE }}
+      SNOW_WAREHOUSE: ${{ secrets.SNOW_WAREHOUSE }}
+      SNOW_DATABASE: ${{ secrets.SNOW_DATABASE }}
+      SNOW_SCHEMA: ${{ secrets.SNOW_SCHEMA }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -21,17 +30,6 @@ jobs:
       - name: Install Snow CLI
         run: |
           pip install snowflake-cli-labs
-
-      - name: Set environment variables from secrets
-        env:
-          SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
-          SNOW_USER: ${{ secrets.SNOW_USER }}
-          SNOW_PASSWORD: ${{ secrets.SNOW_PASSWORD }}
-          SNOW_ROLE: ${{ secrets.SNOW_ROLE }}
-          SNOW_WAREHOUSE: ${{ secrets.SNOW_WAREHOUSE }}
-          SNOW_DATABASE: ${{ secrets.SNOW_DATABASE }}
-          SNOW_SCHEMA: ${{ secrets.SNOW_SCHEMA }}
-        run: echo "Environment variables loaded"
 
       - name: Create Snow CLI config
         run: |
