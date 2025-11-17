@@ -48,17 +48,25 @@ jobs:
       # Create snowflake.yml for dbt deploy
       # ------------------------------
       - name: Create snowflake.yml for Snow CLI
+        env:
+          SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
+          SNOW_USER: ${{ secrets.SNOW_USER }}
+          SNOW_PASSWORD: ${{ secrets.SNOW_PASSWORD }}
+          SNOW_ROLE: ${{ secrets.SNOW_ROLE }}
+          SNOW_WAREHOUSE: ${{ secrets.SNOW_WAREHOUSE }}
+          SNOW_DATABASE: ${{ secrets.SNOW_DATABASE }}
+          SNOW_SCHEMA: ${{ secrets.SNOW_SCHEMA }}
         run: |
           cat <<EOF > snowflake.yml
           connections:
             default:
-              account: "${{ secrets.SNOW_ACCOUNT }}"
-              user: "${{ secrets.SNOW_USER }}"
-              password: "${{ secrets.SNOW_PASSWORD }}"
-              role: "${{ secrets.SNOW_ROLE }}"
-              warehouse: "${{ secrets.SNOW_WAREHOUSE }}"
-              database: "${{ secrets.SNOW_DATABASE }}"
-              schema: "${{ secrets.SNOW_SCHEMA }}"
+              account: "${SNOW_ACCOUNT}"
+              user: "${SNOW_USER}"
+              password: "${SNOW_PASSWORD}"
+              role: "${SNOW_ROLE}"
+              warehouse: "${SNOW_WAREHOUSE}"
+              database: "${SNOW_DATABASE}"
+              schema: "${SNOW_SCHEMA}"
 
           dbt:
             profile_name: my_project_1
@@ -66,6 +74,7 @@ jobs:
             target: dev
             connection: default
           EOF
+
 
       # ------------------------------
       # Deploy dbt
