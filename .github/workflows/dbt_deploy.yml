@@ -44,6 +44,7 @@ jobs:
       - name: Test Snowflake connection
         run: snow connection test -c default
 
+
       # ------------------------------
       # Create snowflake.yml for dbt deploy
       # ------------------------------
