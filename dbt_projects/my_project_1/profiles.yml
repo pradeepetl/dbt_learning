@@ -1,9 +1,8 @@
 my_project_1:
   outputs:
     dev:
-      account: {{ account }}
+      account: "pejnhlw-mm11963"
       database: "DEMO_DB"
-      password: "AbcdAbcdAbcd067$"
       role: "ACCOUNTADMIN"
       schema: "PUBLIC"
       threads: 4
