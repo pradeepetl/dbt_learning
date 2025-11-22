@@ -19,3 +19,4 @@ order_id,region,category,order_date,sales_amount,cost_amount
 1018,East,Electronics,2024-04-15,2100,1400
 1019,South,Clothing,2024-04-18,1000,600
 1020,West,Furniture,2024-04-20,2300,1600
+1021,North,Furniture,2025-01-09,1200,800

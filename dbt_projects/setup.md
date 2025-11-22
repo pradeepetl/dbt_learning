@@ -6,6 +6,8 @@ pip install dbt-snowflake snowflake-snowpark-python
 
 dbt init my_project_1
 
+dbt seed
+
 dbt run --select "path:models/staging"
 dbt run --select path:models/intermediate
 
